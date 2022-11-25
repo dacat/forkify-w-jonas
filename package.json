@@ -2,20 +2,20 @@
   "name": "forkify",
   "version": "1.0.0",
   "description": "Recipe application",
+  "source": "index.html",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "start": "parcel",
+    "build": "parcel build"
   },
   "author": "Felix Dominguez",
-  "license": "ISC",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.0",
-    "parcel": "^2.8.0",
     "jsdoc": "^4.0.0"
   },
   "dependencies": {
     "core-js": "^3.26.1",
     "fractional": "^1.0.0",
-    "regenerator-runtime": "^0.13.11"
+    "regenerator-runtime": "^0.13.11",
+    "parcel": "latest"
   }
 }
