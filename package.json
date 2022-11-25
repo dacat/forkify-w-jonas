@@ -5,7 +5,8 @@
   "source": "index.html",
   "scripts": {
     "start": "parcel",
-    "build": "parcel build"
+    "build": "parcel build",
+    "heroku-postbuild" : "parcel build"
   },
   "author": "Felix Dominguez",
   "devDependencies": {
