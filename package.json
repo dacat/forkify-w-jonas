@@ -9,15 +9,11 @@
   },
   "author": "Felix Dominguez",
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.8.0",
-    "jsdoc": "^4.0.0"
   },
   "dependencies": {
     "core-js": "^3.26.1",
     "fractional": "^1.0.0",
     "regenerator-runtime": "^0.13.11",
-    "parcel": "latest",
-    "@parcel/transformer-sass": "^2.8.0",
-    "jsdoc": "^4.0.0"
+    "parcel": "latest"
   }
 }
