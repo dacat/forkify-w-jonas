@@ -4,6 +4,8 @@ import searchView from './views/searchView';
 import resultsView from './views/resultsView';
 import paginationView from './views/paginationView';
 import bookmarksView from './views/bookmarksView';
+import addRecipeView from './views/addRecipeView';
+import { MODAL_CLOSE_SEC } from './config';
 import 'core-js/stage';
 import 'regenerator-runtime/runtime';
 
@@ -81,6 +83,36 @@ const controlAddBookMark = function() {
 const controlRenderBookmark = function() {
   bookmarksView.render(model.state.bookmarks);
 };
+
+const controlAddRecipe = async function(newRecipe) {
+  try {
+    // display spinner
+    addRecipeView.renderSpinner();
+
+    //upload recipe
+    await model.uploadRecipe(newRecipe);
+
+    //render recipe
+    recipeView.render(model.state.recipe)
+
+    // display success message
+    addRecipeView.renderMessage();
+
+    // render bookmark view
+    bookmarksView.render(model.state.bookmarks);
+
+    // change id in the url
+    window.history.pushState(null, '', `#${model.state.recipe.id}`)
+
+    //close form
+    setTimeout(function() {
+      addRecipeView.toggleWindow()
+    }, MODAL_CLOSE_SEC * 1000);
+  } catch (e) {
+    console.error(e);
+    addRecipeView.renderError(e.message);
+  }
+}
 /**
  * other half of the pub-sub paradigm
  */
@@ -91,6 +123,7 @@ const init = function() {
   recipeView.addHandlerBookmark(controlAddBookMark);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
+  addRecipeView.addHandlerUpload(controlAddRecipe);
 };
 
 init();

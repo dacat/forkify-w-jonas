@@ -18,7 +18,7 @@ export default class View {
     this._render(markup);
   }
 
-  renderMessage(message) {
+  renderMessage(message = this._message) {
     const markup = this._generateMessage(message, false);
     this._render(markup);
   }
