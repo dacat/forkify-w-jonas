@@ -3,6 +3,7 @@ import recipeView from './views/recipeView';
 import searchView from './views/searchView';
 import resultsView from './views/resultsView';
 import paginationView from './views/paginationView';
+import bookmarksView from './views/bookmarksView';
 import 'core-js/stage';
 import 'regenerator-runtime/runtime';
 
@@ -27,7 +28,7 @@ const controlRecipes = async function() {
 
     // 0) Update results view to mark the current selected
     resultsView.update(model.getSearchResultsPage());
-
+    bookmarksView.update(model.state.bookmarks);
     // 1) Loading Recipe
     await model.loadRecipe(recipeHash);
 
@@ -63,12 +64,16 @@ const controlPagination = function(page) {
 }
 
 const controlAddBookMark = function() {
+  // Add/Remove bookmarks
   if(!model.state.recipe.bookmarked)
     model.addBookmark(model.state.recipe);
   else
     model.deleteBookmark(model.state.recipe);
-
+  // update recipe view
   recipeView.update(model.state.recipe);
+  // render bookmarks
+  bookmarksView.render(model.state.bookmarks)
+
 }
 /**
  * other half of the pub-sub paradigm
