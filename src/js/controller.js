@@ -5,7 +5,6 @@ import resultsView from './views/resultsView';
 import paginationView from './views/paginationView';
 import 'core-js/stage';
 import 'regenerator-runtime/runtime';
-import { API_URL } from './config';
 
 // // hot module reloading
 // if (module.hot) {
@@ -13,7 +12,6 @@ import { API_URL } from './config';
 // }
 // // from parcel
 
-const recipeContainer = document.querySelector('.recipe');
 /**
  * Main controller for the Forkify App.
  *
@@ -63,12 +61,22 @@ const controlPagination = function(page) {
   resultsView.render(model.getSearchResultsPage(page))
   paginationView.render(model.state.search)
 }
+
+const controlAddBookMark = function() {
+  if(!model.state.recipe.bookmarked)
+    model.addBookmark(model.state.recipe);
+  else
+    model.deleteBookmark(model.state.recipe);
+
+  recipeView.update(model.state.recipe);
+}
 /**
  * other half of the pub-sub paradigm
  */
 const init = function() {
   recipeView.addHandlerRender(controlRecipes);
-  recipeView.addHandlerUpdateServings(controlServings)
+  recipeView.addHandlerUpdateServings(controlServings);
+  recipeView.addHandlerBookmark(controlAddBookMark);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 }
